@@ -9,7 +9,6 @@
 #import "AudioTap.h"
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
-#import <Accelerate/Accelerate.h>
 
 @implementation AudioTap
 

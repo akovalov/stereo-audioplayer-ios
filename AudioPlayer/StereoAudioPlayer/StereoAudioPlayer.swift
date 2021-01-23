@@ -8,7 +8,6 @@
 
 import Foundation
 import AVFoundation
-import Accelerate
 
 class StereoAudioPlayer: AudioPlayable {
     
