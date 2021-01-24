@@ -67,6 +67,17 @@
                                     <constraint firstItem="Nzd-FO-0DA" firstAttribute="width" secondItem="I8x-5T-pWp" secondAttribute="width" id="J2s-7M-PDJ"/>
                                 </constraints>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="46L-yQ-iVP">
+                                <rect key="frame" x="167" y="157.5" width="80" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="19W-GN-Wmu"/>
+                                    <constraint firstAttribute="height" constant="40" id="RVx-Md-vtS"/>
+                                </constraints>
+                                <state key="normal" title="Mono"/>
+                                <connections>
+                                    <action selector="monoToggle:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HES-ig-Azc"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -74,16 +85,19 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="gB0-0f-ZU6" secondAttribute="trailing" constant="40" id="02J-ZL-J9H"/>
                             <constraint firstItem="2Vn-Ij-e0t" firstAttribute="top" secondItem="gB0-0f-ZU6" secondAttribute="bottom" constant="100" id="0A7-CE-O4d"/>
                             <constraint firstItem="gB0-0f-ZU6" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="Hdi-eT-yU1"/>
+                            <constraint firstItem="Qgj-Pf-Cga" firstAttribute="top" secondItem="46L-yQ-iVP" secondAttribute="bottom" constant="50" id="Qhg-cK-MHQ"/>
                             <constraint firstItem="2Vn-Ij-e0t" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Rcy-3f-vXf"/>
                             <constraint firstItem="gB0-0f-ZU6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="cOy-OX-Uh8"/>
                             <constraint firstItem="gB0-0f-ZU6" firstAttribute="top" secondItem="Qgj-Pf-Cga" secondAttribute="bottom" constant="30" id="lSr-9y-YtS"/>
                             <constraint firstItem="Qgj-Pf-Cga" firstAttribute="trailing" secondItem="gB0-0f-ZU6" secondAttribute="trailing" id="lu4-lU-ffS"/>
+                            <constraint firstItem="46L-yQ-iVP" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="q9z-jm-I44"/>
                             <constraint firstItem="2Vn-Ij-e0t" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="vHG-s2-PDo"/>
                             <constraint firstItem="Qgj-Pf-Cga" firstAttribute="leading" secondItem="gB0-0f-ZU6" secondAttribute="leading" id="xCH-1B-SGa"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="leftSlider" destination="oGl-nx-SrU" id="FOc-Ny-TPN"/>
+                        <outlet property="monoButton" destination="46L-yQ-iVP" id="OGc-cS-FEN"/>
                         <outlet property="rightSlider" destination="RaT-xM-cML" id="MxY-7w-2q5"/>
                     </connections>
                 </viewController>

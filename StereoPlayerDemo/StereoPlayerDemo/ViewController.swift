@@ -11,6 +11,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var leftSlider: UISlider!
     @IBOutlet weak var rightSlider: UISlider!
+    @IBOutlet weak var monoButton: UIButton!
     
     var player: AudioPlayable?
     
@@ -47,6 +48,14 @@ class ViewController: UIViewController {
     @IBAction func rightValueChanged(_ sender: UISlider) {
         
         (player as? StereoAudioPlayer)?.rightLevel = sender.value
+    }
+    
+    @IBAction func monoToggle(_ sender: UIButton) {
+        
+        monoButton.isSelected = !monoButton.isSelected
+        monoButton.setTitle(monoButton.isSelected ? "Stereo" : "Mono", for: .normal)
+        
+        (player as? StereoAudioPlayer)?.mono = monoButton.isSelected
     }
 }
 

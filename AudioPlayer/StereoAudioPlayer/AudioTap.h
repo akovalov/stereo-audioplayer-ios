@@ -17,6 +17,8 @@
 
 @property(nonatomic, assign) float leftLevel;
 @property(nonatomic, assign) float rightLevel;
+@property(nonatomic, assign) bool monoLeft;
+@property(nonatomic, assign) bool monoRight;
 
 @end
 

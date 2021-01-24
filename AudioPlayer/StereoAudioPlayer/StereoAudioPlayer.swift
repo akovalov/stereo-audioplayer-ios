@@ -13,40 +13,65 @@ class StereoAudioPlayer: AudioPlayable {
     
     var currentTime: TimeInterval {
         set {
-            player.seek(to: CMTime(seconds: newValue, preferredTimescale: 1))
+            leftPlayer.seek(to: CMTime(seconds: newValue, preferredTimescale: 1))
+            rightPlayer.seek(to: CMTime(seconds: newValue, preferredTimescale: 1))
         }
         get {
-            return player.currentTime().seconds
+            return leftPlayer.currentTime().seconds
         }
     }
     var duration: TimeInterval {
-        return player.currentItem?.asset.duration.seconds ?? 0
+        return leftPlayer.currentItem?.asset.duration.seconds ?? 0
     }
     var isPlaying: Bool {
-        return player.rate != 0 && player.error == nil
+        return leftPlayer.rate != 0 && leftPlayer.error == nil
     }
     var onDidFinishPlaying: ((_ successfully: Bool) -> Void)?
     
     var leftLevel: Float = 1 {
         didSet {
-            audioTap.leftLevel = leftLevel
+            leftAudioTap.leftLevel = leftLevel
         }
     }
     var rightLevel: Float = 1 {
         didSet {
-            audioTap.rightLevel = rightLevel
+            rightAudioTap.rightLevel = rightLevel
+        }
+    }
+    var mono: Bool = false {
+        didSet {
+            leftAudioTap.monoLeft = mono;
+            rightAudioTap.monoRight = mono;
         }
     }
     
-    private var player: AVPlayer!
-    private var audioTap: AudioTap!
+    private var leftPlayer: AVPlayer!
+    private var rightPlayer: AVPlayer!
+    private var leftAudioTap: AudioTap!
+    private var rightAudioTap: AudioTap!
         
     required init(contentsOf url: URL) {
+        
+        leftAudioTap = AudioTap()
+        leftAudioTap.leftLevel = 1
+        leftAudioTap.rightLevel = 0
+        leftPlayer = setupPlayer(with: url, audioTap: leftAudioTap)
+        
+        rightAudioTap = AudioTap()
+        rightAudioTap.leftLevel = 0
+        rightAudioTap.rightLevel = 1
+        rightPlayer = setupPlayer(with: url, audioTap: rightAudioTap)
+        
+        if let playerItem = leftPlayer.currentItem {
+            NotificationCenter.default.addObserver(self, selector: #selector(itemDidFinishPlaying), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: playerItem)
+        }
+    }
+    
+    private func setupPlayer(with url: URL, audioTap: AudioTap) -> AVPlayer {
         
         let asset = AVAsset(url: url)
         let playerItem = AVPlayerItem(asset: asset)
         
-        audioTap = AudioTap()
         var callbacks = audioTap.callbacks()
         
         var tap: Unmanaged<MTAudioProcessingTap>?
@@ -60,17 +85,17 @@ class StereoAudioPlayer: AudioPlayable {
         audioMix.inputParameters = [params]
         playerItem.audioMix = audioMix
         
-        player = AVPlayer(playerItem: playerItem)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(itemDidFinishPlaying), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: playerItem)
+        return AVPlayer(playerItem: playerItem)
     }
     
     func play() {
-        player.play()
+        leftPlayer.play()
+        rightPlayer.play()
     }
     
     func pause() {
-        player.pause()
+        leftPlayer.pause()
+        rightPlayer.pause()
     }
     
     @objc

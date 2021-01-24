@@ -14,6 +14,8 @@
 
 @synthesize leftLevel;
 @synthesize rightLevel;
+@synthesize monoLeft;
+@synthesize monoRight;
 
 - (instancetype)init
 {
@@ -21,6 +23,8 @@
     if (self) {
         leftLevel = 1;
         rightLevel = 1;
+        monoLeft = false;
+        monoRight = false;
     }
     return self;
 }
@@ -79,6 +83,15 @@ void process(MTAudioProcessingTapRef tap,
     {
         bufferL[j] = bufferL[j] * context.leftLevel;
         bufferR[j] = bufferR[j] * context.rightLevel;
+        
+        if (context.monoLeft)
+        {
+            bufferR[j] = bufferL[j];
+        }
+        else if(context.monoRight)
+        {
+            bufferL[j] = bufferR[j];
+        }
     }
 }
 
