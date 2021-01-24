@@ -8,6 +8,8 @@ This is more as a reference project of an implementation of dynamic volume level
 
 `AVPlayer` and `MTAudioProcessingTap` are used under the hood. 
 
+Mono mode is made via two AVPlayers to play original left and right channel in both channels. It should be possible to make in `process(` function of `AudioTap.m` file by manipulating audio buffers and have just one AVPlayer, but I couldn't do it so made a simple solution with two players.
+
 ### Usage
 
 Try out the Demo project

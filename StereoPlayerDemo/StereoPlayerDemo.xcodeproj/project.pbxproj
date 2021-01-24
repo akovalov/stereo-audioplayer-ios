@@ -100,8 +100,8 @@
 			children = (
 				9DD6ADDD25BCC84100F889F5 /* AVAssetTrack+IsStereo.swift */,
 				9DD6ADDE25BCC84100F889F5 /* StereoAudioPlayer.swift */,
-				9DD6ADDF25BCC84100F889F5 /* AudioTap.m */,
 				9DD6ADE025BCC84100F889F5 /* AudioTap.h */,
+				9DD6ADDF25BCC84100F889F5 /* AudioTap.m */,
 			);
 			path = StereoAudioPlayer;
 			sourceTree = "<group>";
